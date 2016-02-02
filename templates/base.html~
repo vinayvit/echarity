@@ -35,7 +35,7 @@
 background:white;
 }
 .modal-footer,.modal-header{
-background:LightSteelBlue;
+background:#B2D234;
 }
 #hover:hover
 	{
@@ -68,7 +68,7 @@ background:LightSteelBlue;
         padding-left: auto;}
 </style>
 </head>
-<body class="responsive" style="background: Lavender">
+<body class="responsive" style="background: #B2D234">
 <div class="responsive">
 {% include "products/header.html" %}
 

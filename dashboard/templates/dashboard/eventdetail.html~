@@ -1,59 +1,61 @@
 {% extends "base.html"%}
 {% block content %}
-<!DOCTYPE html>
-{% load crispy_forms_tags %}
 {% load staticfiles %}
-<link href="{% static 'css/datetimepicker.css' %}" rel="stylesheet" />
-<script src="{% static 'js/bootstrap-datetimepicker.js' %}"></script>
-<script src="{% static 'js/jquery-1.8.3.min.js' %}"></script>
-
-        <body><br><br>
+        <body><br><br><br>
                 <!-- List of uploaded documents -->
-                  <div class="container-fluid" style="width: auto; height:950px; color:grey; background :url({% static "img/map-image.png" %}) no-repeat center top"> 
+                  <div class="container-fluid" style="width: auto; height:auto; color:grey; background : #F7F7F7) no-repeat center top"> 
          
          <div class="container-fluid">
 <div class='row'>    
        <div class='col-sm-1'></div>           
-<div class='col-sm-5'>
+<div class='col-sm-6' >
+<div style="width:auto;height:auto; background-color:white">
+<div style="width:auto; height:auto;padding-left:5px;padding-top:0.5px;background-color:#F7F7F7">
 
-<h1 style="width:490px; height:auto;padding-top:5px;padding-top:5px; background-color:white">{{  event.eventtype }} </h1><br>
+<h2 >{{event.eventtype|title }} </h2><hr/>
+</div>
  {% if event.snap %}
- <img id="img1"src="{{ event.snap.url }}"  class="img-inline-responsive" width="500px" height="500px" alt="your selected item"/>
-     
- {% endif %} 
-<p>{{ event.description|truncatewords:15}}</p>
-</div><div class='col-sm-1'></div>  
-<div class='col-sm-5'>
-<br><br>
-<a href='{{ product.get_absolute_url }}'style="color:#428BCA"><h3><i class="fa fa-calendar"></i> <span class="network-name">{{  event.date_event }} </span></h3></a> 
-<a href='{{ product.get_absolute_url }}'style="color:#428BCA"><h3><i class="fa fa-calendar"></i> <span class="network-name">{{  event.duration }}
-</span></h3></a> 
-<a href='{{ product.get_absolute_url }}' style="color:#428BCA"><h3><i class="fa fa-calendar"></i> <span class="network-name">{{  event.place }}</span></h3></a> 
-     
+ <img src="{{ event.snap.url }}"  class="img-responsive" style="height:60%;width:100%; alt="your selected item"/>
+   </div>  
+ {% endif %} <br>
 
-<a href='{{ product.get_absolute_url }}' style="color:#428BCA"><h3><i class="fa fa-calendar"></i> <span class="network-name">Dresscode: {{  event.dresscode }}</span></h3></a> 
-
-          <br> 
+<div style="width:auto;padding-top:1px; height:auto;background-color:#F7F7F7">
+<h2 style="padding-left:6px"><b>Description of Event</b></h2>
+<div style="padding-left:6px;width:auto; height:auto;background-color:white"> 
+<p>{{ event.description|truncatewords:15}}</p><br><br></div>
+</div> </div> 
+<div class='col-sm-4'>
 
 
+<div style="width:auto; height:auto;padding-top:1px; background-color:#F7F7F7">
+<center><h4>Event Schedule</h4></center>
+<div style="padding-left:6px;width:auto; height:auto; padding-bottom:6px; background-color:white">
+
+<h4><b>Event On</b> : {{  event.date_event }} </h4>
+<h4><b>Duration</b> : {{  event.duration }}</h4></div></div> <br> 
+<div style="padding-left:6px;width:auto; height:auto;padding-top:3px; padding-bottom:3px; background-color:white">
+<h4><b>Event Place</b> : {{  event.place }}</h4>
+<h4><b>Dresscode</b> : {{  event.dresscode }}</h4> 
+</div>
+<a href="/products/enquiry/{{ event.user}}/" ><h3 class='btn btn-success btn-block'>{{  event.user }}</h3></a> <br>
 {% if document %}
                                 
  {% for document in document %}
-                               <h4 style="width:300px; height:auto;padding-top:5px;padding-top:5px; background-color:white" data-toggle="modal" id='rim' data-target="#event">  <img src="{{ document.docfile.url }}" class="img-circle" id="circle" alt="{% static 'assets/img/find_user.png' %}" width="160px" height="150px"/>{{document.firstname}}&nbsp;{{ document.lastname}}</h4>
+<div style="width:auto; height:auto;background-color:white; padding-bottom:20px;">
+<div style="width:auto; height:auto;padding-left:25px; background-color:#F7F7F7;  padding-bottom:8px;">
+<a href=#event style="color:#428BCA">   <h4 data-toggle="modal" id='rim' data-target="#event">  <img src="{{ document.docfile.url }}" class="img-circle" id="circle" alt="{% static 'assets/img/find_user.png' %}" width="100px" height="100px"/>&nbsp;&nbsp;{{document.firstname}}&nbsp;{{ document.lastname}}</h4></a>
                       {% endfor %}
           
                         {% else %}
-                      <h4 style="width:470px; height:auto;padding-top:5px;padding-top:5px; background-color:white"> <img id="blah" src="{% static 'assets/img/find_user.png' %}" class="img-circle" id="circle"   alt="your selected item"/></img>UNKNOWN</h4>                {% endif %} 
+                      <h4> <img id="blah" src="{% static 'assets/img/find_user.png' %}" class="img-circle" id="circle"   alt="your selected item"/></img>UNKNOWN</h4>               {% endif %} </div>
 
-<a href="/products/enquiry/{{ event.user}}/" ><h3 class='btn btn-success btn-block'><i class="fa fa-calendar"></i> <span class="network-name">{{  event.user }}</span></h3></a> <br><br><br>
 
-<center>
-<i class="fa fa-facebook fa-4x"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <i class="fa fa-twitter fa-4x"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-                           <i class="fa fa-google-plus fa-4x"></i>&nbsp;&nbsp;&nbsp;&nbsp;
-
-                            <i class="fa fa-linkedin fa-4x"></i></a></center>
-</div></div> 
+<p style="padding-left:75px;">SHARE ON SOCIAL MEDIA</p><center>
+<a href="//facebook.com"><img src="{% static 'img/facebook.png' %}" class="img-inline-responsive"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <a href="//twitter.com"><img src="{% static 'img/Twitter.png' %}" class="img-inline-responsive"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <a href="//in.linkedin.com"><img src="{% static 'img/in.png' %}" class="img-inline-responsive"/></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					    <a href="//plus.google.com"><img src="{% static 'img/gplus1.png' %}" class="img-inline-responsive"/></a>&nbsp;&nbsp;</center></div>
+</div><div class='col-sm-1'></div>  
 
 
 
@@ -91,8 +93,8 @@
 
     </div></div>
 {% endfor %}
-</div>
-                     
+
+       </div></div> <br><br><br><br>              
  
               </body>
 

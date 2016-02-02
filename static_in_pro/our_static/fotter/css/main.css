@@ -1,6 +1,6 @@
 
   body {
-
+    font-family: "Arctik 2", sans-serif;
     font-weight: 300;
     font-size: 14px;
     line-height: 22px;
@@ -30,7 +30,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: "Myriad Apple", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Arctik 2", sans-serif;
     font-weight: 300;
   }
 

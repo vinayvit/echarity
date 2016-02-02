@@ -17,12 +17,12 @@
       <div class="col-sm-2"></div>
       <div class="col-sm-9">
 
-<form action="" method="post">
+                <form action="." method="post" enctype="multipart/form-data">
 {% csrf_token %} 
 <table>
 {{ form|crispy }}
 </table>
-<center><input type="image" src='{% static "img/update.png" %}' value="{% trans "Upload Profile" %} &raquo;"/></center>
+                       <center> <input type="image" src='{% static "img/update.png" %}' /></center><br><br>
 </form></div></div></div></div><br><br>
 </div><br></div>
 

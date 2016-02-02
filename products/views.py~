@@ -181,7 +181,7 @@ class VariationListView(ListView):
 ################################################################################## for show detail of product mail and dashboard
 #Product Detail view for showing detail of products............
 class ProductDetailView(DetailView):
-    model = Product
+
     def product_detail_view_func(request, id):
         product_instance =  get_object_or_404(Product, id=id)
         try:
@@ -355,7 +355,7 @@ def service_detail(request, pk):
 def service_history(request):
     model = Service, User
     posts = Service.objects.filter(user_id = request.user.id)
-    document = Document.objects.filter(user_id = request.user.id).order_by('-docfile')[:1]
+    document = Document.objects.filter(user_id = post.user.id).order_by('-docfile')[:1]
     return render(request, 'products/service_list.html', {'posts': posts, 'document': document})
     
 def servicelist(request):
@@ -372,7 +372,7 @@ def service_detail_home(request, pk):
     model = Service, Document
     #user_id=request.user.id
     post = get_object_or_404(Service, pk=pk)
-    document = Document.objects.filter(user_id = post.user.id)[:1]
+    document = Document.objects.filter(user_id = post.user.id).order_by('-docfile')[:1]
     #document = Document.objects.filter(user_id = request.user.id)[:1]
     return render(request, 'products/service_detail_home.html', {'post': post, 'document': document})
 

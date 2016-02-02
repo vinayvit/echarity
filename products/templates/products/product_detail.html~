@@ -1,84 +1,123 @@
-{% extends "base.html"%}       
-{% load i18n %} 
-{% block content %}
+{% extends 'base.html' %}
 
 {% load staticfiles %}
 
+{% block head_title %}
+E-CHARITYProducts
+{% endblock %}
 
-<head>
-    <script src="{% static 'js/jquery.elevatezoom.js' %}"></script>
-</head>
-<div class="container-fluid" style="color:#58FA58; background-color: GhostWhite "><br>
+{% block styles %}
+.jumbotron {
+	/*color: red;*/
+}
+{% endblock %}
+
+
+{# Comments here #}
+
+
+{% block content %}
+
+
+
+
+{% block jumbotron2 %}
+<body>
+
+    <div id="wrapper" class="responsive-inline" style="padding:1px;border:10px groove LightSteelBlue; background-color:LightSkyBlue">
+
+  <div class="container-fluid" class="responsive">
 <br>
-<div class="container">
-<div class="row">
-    <div class='col-md-4'>   
- 
-	 {% if object %}
-                       		<div class="col-xs-12">
-                        
-                              
-                               <img id="vin" src="{{ object.docfile.url }}"   style="width:330px; height:180px; border:1px; class="img-circle"  alt="{{ object.docfile.name }}"/>		<hr/>
-                               
+ <div id="myCarousel" class="carousel slide-responsive" data-ride="carousel" style="height:400px; width:1060px; padding-left:60px">
+   <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox" style="width: 1060px;padding-left:10px">
+      <div class="item active">
+       <div class="img" style="height: 400px; width:1053px">
+      </div>
+
+   </div>
+
+      <div class="item">
+       <div class="img" style="height: 400px; width:1053px">
+      </div>
+
+   </div>
+
+
+      <div class="item ">
+       <div class="img" style="height: 400px; width:1053px">
+      </div>
+
+   </div>
+
+      <div class="item ">
+       <div class="img" style="height: 400px; width:1053px">
+      </div>
+
+   </div>
+
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" style="float:leftt; padding-right:126px; width:9px; height:0px; margin-top:177px; color:MidnightBlue">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="ture"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" style="float:right; margin-right:96px; width:9px; height:0px; margin-top:177px; color:MidnightBlue">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+</div><br>
+{% endblock %}
+
+<div class="column large-10 large-centered text-center">
+            <p style="font: oswald; padding-top:7px">
+                <h3 class="show-for-medium-up" style="color:LightYellow">"Celebrate the Light of Happiness...<br><br> Invlove Own and Dear-one's with Charity<br>
+                <br>Fight for these and that things which you Waste or not Use.."<br><br></div>
+<div style="height:auto; background-color:GhostWhite">
+<hr>
+             <center> <h1 style="color:RoyalBlue  "><b> DONATED PRODUCT SECTION<b></h1></center>
+
+<br><br>
+ <div class="container-fluid">
+<div class='row'>
+
+{% for object in object_list %}
+
+		<div class='col-md-4'>
+			<div class="thumbnail">
+	{% if object %}
+<div>
+
+
+ <img src="{{ object.docfile.url }}" width="380px" height="210px" alt="Image not avilable.."></img>
+
+						</div>	<!-- <img class='img-responsive' src="{{ MEDIA_URL }}{{ item.image }}" /> -->
+
+
+{% endif %}
+<a href='/products/{{ object.pk }}/'> <h1>{{ object.title|title  }}</h1></a>
+
+<a href="/products/{{ object.pk }}/" class='btn btn-primary btn-block' role="button">View</a>
+<a href="/products/enquiry/{{ object.user}}/" class='btn btn-default btn-block' role="button"><span class="glyphicon glyphicon-user">&nbsp;&nbsp;{{ object.user }}</span></a>
+
+
+           </div>
+
+
 		</div>
 
-<div class="col-xs-6">
-	    <a href="#" class="thumbnail">
- <img id="vin" src="{{ object.docfile.url }}"   style="width:330px; height:180px; border:1px; class="img-circle"  alt="{{ object.docfile.name }}"/>	
-	    </a>
-	  	</div>
-                        
-                        
-               
+{% cycle "" "" "</div><div class='row'>" %}
+{% endfor %}
 
-                {% endif %}
-
-        </div>    
-	
-    <!-- Product Sidebar --> 
-   
-       <div class='col-sm-8'>
-		<div class='col-sm-8 pull-left'>
-			 <h1><b>{{ object.title|upper }} </b>
-			 </h1>
-		 </div>
-
-		<div class='col-sm-4 pull-right'>
-
-			 	 <h4 class='btn btn-default btn-block'>ITEM REMAINS</h4>
-			 	<h6  class="form-control"><center>{{ object.quantity }}</center></h6>
-
-	 	</div>
-	 	<div class='col-sm-12'>
-			 <hr/><h3 style="color:grey;"><lable>Post On:{{ object.date_created|date:"d M Y" }}</lable></h3>
-       
-        <h3 style="color:grey;"><lable>Expire On:{{object.expire_date|date:"d M Y"}}</lable></h3>
-			
-	 	</div>
-			<a href="/products/enquiry/{{ object.user}}/"> <div class='col-sm-6'><h3 style="color:grey;">Donated By: {{ object.user}}<br/>
-<h6>*use this name for message or request.</h6><hr/></div></a>
-	 <div class='col-sm-6 pull-center'>
-			 	<br> <a href="/products/enquiry/{{ object.user}}/"><input type="submit" class="btn btn-info btn-lg"  value="{% trans "Excahnge/Donate" %}&raquo;"/></a>
-	 	</div></div>
- <div class='col-sm-8 pull-left'>
-			 	 
-<h3 style="color:grey;"><lable>{{ object.description}}</lable></h3>
-
-   	 	</div>
- </div>
-
-    </div>   
-
-<center><a href="{% url 'products' %}">
-                    <i class="fa fa-external-link">
-  <b><h4>BACK TO PRODUCT LIST</h4><b></i></a></center> </div>
-<div class="container-fluid" style="height:100px; width: auto; color:#58FA58; background-color: PaleTurquoise"><br> 
-<h4>Related Project.......</h4><center></center>
-        
-    </div>
-
-
-<script>	
-     $("#vin").elevateZoom({scrollZoom : true});
-    </script>
+</div>
+</div>
+</div></div>
+</body>
 {% endblock %}
+
+
+
+
+

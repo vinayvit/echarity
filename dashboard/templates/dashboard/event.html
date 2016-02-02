@@ -48,49 +48,10 @@ function resumeDiv() {
 </head>
    <body>     
                 <!-- List of uploaded documents -->
-                  <div class="container-fluid" style="width: auto; color:grey; background-color: ghostwhite"> 
-         
-         <br> <div class="container-fluid" >
-
- <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:400px; width:100%; ">
-   <!-- Wrapper for slides -->
-    <div class="carousel-inner" role="listbox" style="width: 100%;">
-      <div class="item active">
-       <div class="img" style="height: 400px; width:100%">
- <img id="img1" src="{% static 'img/page-1_slide01.jpg' %}" class="img-responsive"/>
-      </div>
-
-   </div>
-
-      <div class="item">
-       <div class="img" style="height: 400px; width:100%">
- <img id="img1" src="{% static 'img/page-1_slide02.jpg' %}" class="img-responsive"/>
-      </div>
-
-   </div>
-
-
-      <div class="item ">
-       <div class="img" style="height: 400px; width:100%">
- <img id="img1" src="{% static 'img/page-1_slide03.jpg' %}" class="img-responsive"/>
-      </div>
-
-   </div>
-
-      <div class="item ">
-       <div class="img" style="height: 400px; width:100%">
- <img id="img1" src="{% static 'img/nepal.jpg' %}" class="img-responsive"/>
-      </div>
-
-   </div>
-     
-    </a>
-  </div>
-</div>
-</div>
-<br>
-<hr>
-             <center> <h1 style="color:RoyalBlue  "><b> EVENT SECTION<b></h1></center>
+ <div class="container-fluid" style="color:grey; background-color:#E10985; height:200px"><br>
+ <p style="font-size:43px; padding-left:85px;padding-top:65px; color:white;"> CONNECT</p>
+   </div>     
+ <div id="wrapper" class="responsive-inline" style="padding:0.5px;border:5px groove #E10985; background-color:white">
 
 <br><br>
  <div class="container-fluid">
@@ -98,17 +59,17 @@ function resumeDiv() {
                       
 {% for event in event %}
 		<div class='col-sm-2'>
-			<div class="thumbnail" style="width:100%; height:250px;">
-<a href="/dashboard/event/{{ event.pk }}/" class='btn btn-info btn-block' role="button"><b>{{  event.eventtype|upper|truncatewords:10 }}</b></a>
+			<div class="thumbnail" style="width:100%; height:270px;">
+<a href="/dashboard/event/{{ event.pk }}/" class='btn btn-info btn-block' role="button"><b>{{  event.eventtype|title|truncatewords:10 }}</b></a>
 	
 {% if event.snap %}
 
-		   	 <img src="{{ event.snap.url }}" class="img-responsive"   alt="image not found" style="width:100%; height:100px;"></img>
+		   	<a href="/dashboard/event/{{ event.pk }}/"> <img src="{{ event.snap.url }}" class="img-responsive"   alt="image not found" style="width:100%; height:125px;"></img></a>
            {% else %}
                        <img id="blah" src="{% static 'assets/img/find_user.png' %}"  alt="your selected item" style="width:100%; height:100px;"/>
 								
                 {% endif %}	
-			<h4><span class="glyphicon glyphicon-calendar"><a href='{{ product.get_absolute_url }}'style="color:#428BCA"> {{  event.date_event|date:"d M Y" }}</a></span></h4>
+			<h6><span class="glyphicon glyphicon-calendar"><a href='/dashboard/event/{{ event.pk }}/'style="color:#428BCA"> {{  event.date_event|date:"d M Y" }}</a></span></h6>
 <h4><i class="fa fa-home">
 {{  event.place }}</i></a> </h4>
 {% if event.docfile %}
@@ -118,23 +79,25 @@ function resumeDiv() {
 </div>
 {% endfor %}
 </div><br>
- </div>
+ </div>   
+ <div class="container-fluid"> 
     <div class="row" style="width: auto; color:grey; background-color: Lavender"> 
-    <div class="container-fluid"> 
+
 
 <div class="col-md-6">
 <p><b><h2>Reveal Event Details With Us..</h2></b></p>
 <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
                  
   {{ form|crispy }}
-                                <br>
+                                
  {% if request.user.is_authenticated %}
                         <div class="col-md-5"></div><div class="col-md-7">
-                        <p><input type="image" src='{% static "img/submit.png" %}' /></p></div>
+                        <p><input type="image" src='{% static "img/submit.png" %}' /></p></div><br><br>
                 </form>
 {% else %}
-<div class="col-md-5"></div><div class="col-md-7"><p><button type="button"  class="btn btn-info btn-lg" onclick="alert('Login first for Publish Event')">Submit Event</button>
-</p></div>
+
+<div class="col-md-5"></div><div class="col-md-7"><input type="image" src='{% static "img/submit.png" %}' onclick="alert('Login first for Publish Event')"/>
+</div><br><br>
 {% endif %}
 </div>
 <div class="col-md-6">
@@ -153,8 +116,8 @@ function resumeDiv() {
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; On : {{  event.date_event|date:"d M Y" }}</h5></a><hr>{% endfor %}
 </div>
 </body></div>
-</div></div>
-</div> </body>
+</div>
+</div></div> </body>
 
 </html>
 {% endblock %}
